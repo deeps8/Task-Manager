@@ -1,0 +1,148 @@
+<ion-header mode="ios" class="ion-no-border" *ngIf="!tid">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-back-button mode="md" defaultHref="home"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      ADD TASK
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header mode="ios" class="ion-no-border" *ngIf="tid" >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-back-button mode="md" defaultHref="home"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      UPDATE TASK
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-lg="4" size-xl="4" size-md="6" offset-md="3" offset-lg="4" offset-xl="4">
+
+        <section>
+          <div class="form">
+            <!-- form -->
+            <form novalidate [formGroup]="taskForm" (ngSubmit)="goAddTask(taskForm.value)">
+
+              <!-- titile -->
+              <div class="input">
+                <label>Title</label>
+                <input type="text" 
+                       name="title" 
+                       [ngClass]="{ 'errorInput': taskForm.get('title').hasError('minlength')}"
+                       formControlName="title"
+                       minlength="10" 
+                       required>
+                <div class="error-msg" 
+                  *ngIf="taskForm.get('title').hasError('required') && taskForm.get('title').touched">
+                  required
+                </div>
+                <div class="error-msg" 
+                *ngIf="taskForm.get('title').hasError('minlength')">
+                  too short
+                </div>
+              </div>
+
+              <!-- description -->
+              <div class="input">
+                <label>Description</label>
+                <!-- <input type="password" name=""> -->
+                <textarea name="desc" 
+                          formControlName="desc"
+                          rows="2"></textarea>
+              </div>
+              
+              <ion-row>
+                <ion-col size="6">
+                  <div class="input">
+                    <ion-label>Due Date</ion-label>
+                    <ion-datetime formControlName="dueDate"
+                                  displayFormat="MMM DD, YYYY" 
+                                  pickerFormat="MMM DD, YYYY"
+                                  required
+                                  placeholder="Select Date"></ion-datetime>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <div class="input">
+                    <ion-label>Time</ion-label>
+                    <ion-datetime displayFormat="hh:mm A"
+                                  pickerFormat="hh:mm A"
+                                  formControlName="time"
+                                  required 
+                                  placeholder="Select time"></ion-datetime>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <div class="input">
+                    <ion-label>Remind me</ion-label>
+                    <ion-select value="daily" required formControlName="remind">
+                      <ion-select-option value="daily">Daily</ion-select-option>
+                      <ion-select-option value="sch">Scheduled</ion-select-option>
+                    </ion-select>
+                  </div>
+                </ion-col>
+                <ion-col size="6">
+                  <div class="input">
+                    <ion-label>Priority</ion-label>
+                    <ion-select value="1" required formControlName="priority">
+                      <ion-select-option value="1">High</ion-select-option>
+                      <ion-select-option value="2">Medium</ion-select-option>
+                      <ion-select-option value="3">Low</ion-select-option>
+                    </ion-select>
+                  </div>
+                </ion-col>
+              </ion-row>
+
+              <div class="input add-checklist">
+                <label>Checklist : {{chk.length}} item added </label>
+
+                <ion-item class="check-input" lines="none">
+                  <input slot="start" type="text" name="" formControlName="chkinput" #checkinp placeholder="enter checklist to the task.." >
+                  <ion-button color="medium" fill="solid" (click)="onAddChecklist(checkinp.value)">
+                    <ion-icon name="add-outline"></ion-icon>
+                  </ion-button>
+                </ion-item>
+
+                <ion-list>
+                  <ion-item *ngFor="let entry of chk, index as i" lines="none">
+                    <ion-label>{{entry.value}}</ion-label>
+                    <ion-checkbox slot="start" [id]="i" [checked]="entry.checked" ></ion-checkbox>
+                    <ion-chip slot="end" color="primary" (click)="removeItem(i)" >
+                      <ion-icon name="close-outline"></ion-icon>
+                    </ion-chip>
+                  </ion-item>
+                </ion-list>
+
+
+              </div>
+
+
+              <!-- submit button -->
+              <div class="sub-btn" *ngIf="!tid">
+                <ion-button color="primary" fill="solid" type="submit" [disabled]="taskForm.invalid">ADD</ion-button>
+              </div>
+              <!-- Update button -->
+              <div class="sub-btn" *ngIf="tid">
+                <ion-button color="primary" fill="solid" (click)="updateTask(taskForm.value)" [disabled]="taskForm.invalid">UPDATE</ion-button>
+              </div>
+
+            </form>
+          </div>
+        </section>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

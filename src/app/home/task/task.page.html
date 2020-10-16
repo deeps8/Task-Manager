@@ -1,0 +1,129 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-lg="4" size-xl="4" size-md="6" offset-md="3" offset-lg="4" offset-xl="4" *ngIf="task">
+        <!-- toolbar btns -->
+        <ion-toolbar [class]="getPiorTClass(task.priority)">
+          <ion-buttons slot="start">
+            <ion-button>
+              <ion-back-button mode="md" defaultHref="home/all"></ion-back-button>
+            </ion-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+            <ion-button [routerLink]="['/home','all','add-task',task.tid]"  >
+              <ion-icon name="pencil-outline"></ion-icon>
+            </ion-button>
+            <ion-button style="margin-left: 20px;" (click)="delTask(task.tid)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+
+
+        <div class="header" [class]="getPiorClass(task.priority)">
+          <!-- task heading -->
+          <ion-row style="padding: 0 12px;">
+            <ion-col size="1" class="check-btn  ion-activatable ripple-parent" (click)="taskStatus(task.tid,task.checklist,!task.done)">
+              <ion-avatar [class]="doneTask(task.priority,task.done)">
+              </ion-avatar>
+              <ion-ripple-effect></ion-ripple-effect>
+            </ion-col>
+            <ion-col size="11" class="task-head">
+              <h4>{{task.title}}</h4>
+            </ion-col>
+          </ion-row>
+
+        </div>
+
+        <div class="desc">
+          <div class="detailed">
+            <p>{{task.description}}</p>
+          </div>
+          <div class="task-details">
+            <ion-list class="detail-list">
+              <ion-grid fixed>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-item lines="">
+                      <ion-avatar slot=""  [class]="getPiorClass(task.priority)">
+                        <ion-icon name="flag-outline"></ion-icon>
+                      </ion-avatar>
+                      <ion-label>{{getPiorClass(task.priority)}} Priority</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-item lines="">
+                      <ion-avatar slot="" [class]="getPiorClass(task.priority)">
+                        <ion-icon name="time-outline"></ion-icon>
+                      </ion-avatar>
+                      <ion-label>{{taskTime(task.time)}}</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col size="12">
+                    <ion-item lines="">
+                      <ion-avatar slot="" [class]="getPiorClass(task.priority)">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                      </ion-avatar>
+                      <ion-label>{{taskDate(task.dueDate)}}</ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              
+              
+              <ion-list>
+                <ion-item lines="">
+                  <ion-avatar [class]="getPiorClass(task.priority)">
+                    <ion-icon name="checkmark-done-outline"></ion-icon>
+                  </ion-avatar>
+                  <ion-label>
+                    Checklist
+                  </ion-label>
+
+                  <ion-chip style="float: right;" color="primary">
+                    <ion-label color="primary">{{doneChecklist(checkList)}}/{{checkList.length}}</ion-label>
+                  </ion-chip>
+
+
+                </ion-item>
+                <ion-list class="checklist">
+                  <ion-item *ngFor="let list of checkList;index as i" lines="none"  >
+                    <ion-label>{{list.value}}</ion-label>
+                    <ion-checkbox slot="start" [checked]="list.checked" (ionFocus)="updateChecklist(i,!list.checked)" ></ion-checkbox>
+                  </ion-item>
+                </ion-list>
+              </ion-list>
+
+            </ion-list>
+          </div>
+        </div>
+
+
+      </ion-col>
+      <ion-col size-lg="4" size-xl="4" size-md="6" offset-md="3" offset-lg="4" offset-xl="4" *ngIf="!task">
+        <div class="custom-skeleton">
+          <ion-skeleton-text animated class="sk-head"></ion-skeleton-text>
+          <div class="ion-margin-vertical ion-padding">
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </div>
+          <div>
+            <ion-list class="" >
+              <ion-item lines="none" *ngFor="let item of [1,2,3,4]">
+                <ion-avatar>
+                  <ion-skeleton-text animated></ion-skeleton-text>
+
+                </ion-avatar>
+                <ion-label>
+                  <ion-skeleton-text animated style="width: 20%;height: 15px; margin-left: 20px;"></ion-skeleton-text>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

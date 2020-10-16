@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "practice-firebase-fb1be": {
+      "hosting": {
+        "app": [
+          "practice-firebase-fb1be"
+        ]
+      }
+    }
+  }
+}

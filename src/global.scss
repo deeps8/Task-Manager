@@ -24,3 +24,82 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@font-face {
+    font-family: amatic;
+    src: url(./assets/font/Amatic-Bold.ttf) format("opentype");
+}
+
+ion-content {
+    background-color: var(--ion-color-bglight);
+
+    ion-grid,
+    ion-col {
+        padding: 0;
+    }
+}
+
+ion-button {
+    --border-radius: 8px;
+    --border-width: 2.4px;
+}
+
+ion-button:focus {
+    --border-style: solid;
+    --border-color: var(--ion-color-dtext);
+}
+
+ion-title {
+    font-family: amatic;
+    font-weight: bold;
+    font-size: 2rem;
+    text-transform: capitalize;
+    color: var(--ion-color-primary);
+}
+
+.default-pad {
+    padding: 0 20px;
+}
+
+//background 
+.high{
+    background:rgb(171, 229 ,253) !important;
+}
+
+.medium{
+    background:rgb(162 ,249 ,172) !important;
+}
+
+.low{
+    background:rgb(236, 221 ,188) !important;
+}
+
+
+//toolbar styling
+.high-t{
+    --background:rgb(171, 229 ,253) !important;
+}
+
+.medium-t{
+    --background:rgb(162, 249, 172) !important;
+}
+
+.low-t{
+    --background:rgb(236, 221 ,188) !important;
+}
+
+
+//task done checkbox styling
+.high-done{
+    background:#4ac6f9 !important;
+}
+
+.medium-done{
+    background:#58e268 !important;
+}
+
+.low-done{
+    background:#e6bf69 !important;
+}

@@ -1,0 +1,101 @@
+ion-toolbar {
+  position: sticky;
+  top: 0;
+  ion-buttons {
+    ion-back-button,
+    ion-button {
+      --icon-font-size: 17px;
+      --color: var(--ion-color-dtext);
+      font-size: 12px;
+      height: 32px;
+      width: 32px;
+      --border-radius: 100%;
+    }
+    ion-button {
+      --background: #05060930;
+    }
+  }
+}
+
+ion-content {
+  color: var(--ion-color-btext);
+  ion-grid {
+    ion-row {
+      ion-col {
+        .header {
+          position: sticky;
+          top: 56px;
+          z-index: 2;
+          padding-bottom: 20px;
+          border-bottom-right-radius: 20px;
+          border-bottom-left-radius: 20px;
+        }
+        .check-btn {
+          //   place-items: center;
+          //   display: grid;
+          ion-avatar {
+            height: 18px;
+            width: 18px;
+            margin: 3px 0;
+            border: 2px solid;
+            border-radius: 5px;
+            background: white;
+          }
+        }
+        .task-head {
+          h4 {
+            margin: 0%;
+            font-weight: 600;
+          }
+        }
+
+        .desc {
+          padding: 0px 12px 20px 12px;
+          p {
+            font-size: 14px;
+            line-height: 20px;
+            word-spacing: 1px;
+          }
+          .task-details {
+            .detail-list {
+              ion-item {
+                --padding-start: 0px;
+                ion-avatar {
+                  display: grid;
+                  place-items: center;
+                  font-size: 15px;
+                  margin-right: 5px;
+                  height: 30px;
+                  width: 30px;
+                }
+                ion-label {
+                  font-weight: 600;
+                  white-space: break-spaces;
+                }
+              }
+              .checklist {
+                padding-left: 50px;
+                ion-item {
+                  ion-label {
+                    font-size: 14px;
+                    font-weight: 500;
+                    white-space: break-spaces;
+                  }
+                  ion-checkbox {
+                    margin: 5px 10px;
+                    marker-end: 10px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.sk-head {
+  height: 120px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}

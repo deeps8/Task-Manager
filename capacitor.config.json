@@ -1,6 +1,6 @@
 {
   "appId": "com.todo.app",
-  "appName": "todoApp",
+  "appName": "Todo App",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

@@ -1,0 +1,75 @@
+<ion-content color="medium">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-lg="4" size-xl="4" size-md="6" offset-md="3" offset-lg="4" offset-xl="4">
+
+        <!-- header -->
+        <ion-toolbar color="medium">
+          <ion-buttons slot="start">
+            <ion-icon src="/assets/icon/todo-logo.svg"></ion-icon>
+          </ion-buttons>
+          <ion-title>TO-DO</ion-title>
+        </ion-toolbar>
+
+        <!-- login form -->
+        <section>
+          <div class="form">
+            <!-- form -->
+            <form novalidate [formGroup]="loginForm" (ngSubmit)="goLogin(loginForm)">
+
+              <!-- email -->
+              <div class="input">
+                <label>Email</label>
+                <input type="email"
+                       name="email" 
+                       [ngClass]="{ 'errorInput': loginForm.get('email').hasError('pattern')}"
+                       formControlName="email" 
+                       pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                       required>
+                <div class="error-msg"
+                  *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched">
+                  required
+                </div>
+                <div class="error-msg"
+                  *ngIf="loginForm.get('email').hasError('pattern')">
+                  invalid
+                </div>
+              </div>
+
+              <!-- password -->
+              <div class="input">
+                <label>Password</label>
+                <input type="password" 
+                       name="password" 
+                       [ngClass]="{ 'errorInput': loginForm.get('password').hasError('minlength')}"
+                       formControlName="password"
+                       minlength="6" 
+                       required>
+                <div class="error-msg" 
+                  *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+                  required
+                </div>
+                <div class="error-msg" 
+                *ngIf="loginForm.get('password').hasError('minlength')">
+                  too short
+                </div>
+              </div>
+
+              <!-- submit button -->
+              <div class="sub-btn">
+                <ion-button color="secondary" fill="solid" type="submit" [disabled]="loginForm.invalid" >Login</ion-button>
+                <p class="ion-text-center">OR</p>
+                <ion-button color="primary" fill="solid">Google</ion-button>
+              </div>
+              <div>
+                <h4>New to Todo App ?<span [routerLink]="['/register']">Register</span> </h4>
+              </div>
+
+            </form>
+          </div>
+        </section>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
